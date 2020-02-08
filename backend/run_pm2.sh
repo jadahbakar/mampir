@@ -1,1 +1,1 @@
-pm2 start -i 5 ./bin/www --name asastarealty-backend
+pm2 start -i 3 ./bin/www --name mampir-backend
