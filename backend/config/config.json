@@ -1,0 +1,39 @@
+{
+    "development_home": {
+        "config_id": "development_home",
+        "app_name": "mampir-backend",
+        "init_startup": "mampir_",
+        "init_company":"mampir",   
+        "app_desc": "Backend for mampir",
+        "app_port": 7997,
+        "db_host": "192.168.100.12",
+        "db_port": "5116",
+        "db_name": "mampir",
+        "db_user": "mampir",
+        "db_pass": "mampir*116",
+        "max_age_login": "2m",
+        "max_age_registration": "15m",
+        "max_age_token": "2h",
+        "redis_port": 6379,
+        "redis_host": "127.0.0.1"
+        
+    },
+    "development_other": {
+        "config_id": "development_other",
+        "app_name": "mampir-backend",
+        "init_startup": "mampir_",
+        "init_company":"mampir",
+        "app_desc": "Backend for mampir",
+        "app_port": 7997,
+        "db_host": "158.140.166.213",
+        "db_port": "5116",
+        "db_name": "mampir",
+        "db_user": "mampir",
+        "db_pass": "mampir*116",
+        "max_age_login": "2m",
+        "max_age_registration": "15m",
+        "max_age_token": "2h",
+        "redis_port": 6379,
+        "redis_host": "127.0.0.1"
+    }
+}

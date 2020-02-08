@@ -4,6 +4,8 @@ var asyncro = require('../asyncro')
 
 var redis = require('redis')
 var clientRedis = redis.createClient()
+// config variables
+const config = require('@root/config/config.js')
 
 // function decrypt (transitmessage, pass) {
 //   var keySize = 256
@@ -32,12 +34,12 @@ async function createRedis (token) {
 
 const getLogin = asyncro.asyncHandler(async (request, response, next) => {
   const payload = {
-    initial: process.env.INIT_STARTUP,
+    initial: config.init_company,
     reqIp: request.connection.remoteAddress // ---ambil ip Address client
   }
   const token = auth.createJWToken({
     sessionData: payload,
-    maxAge: process.env.MAX_AGE_LOGIN
+    maxAge: config.max_age_token
   })
   createRedis(token)
   response.json({ token })

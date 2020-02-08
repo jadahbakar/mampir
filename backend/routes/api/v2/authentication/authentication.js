@@ -29,9 +29,7 @@ function createJWToken (details) {
     },
     keySecret,
     {
-      // expiresIn: process.env.MAX_AGE,
       expiresIn: details.maxAge,
-      // algorithm: "HS256"
       algorithm: 'ES256'
     }
   )

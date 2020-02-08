@@ -57,6 +57,17 @@ const getKategoriWisata = async (request, response, next) => {
   }
 }
 
+// Fasilitas Wisata ---------------------------------------------------------------------------------------------------------
+
+const getFasilitasWisata = async (request, response, next) => {
+  const fasilitasWisata = await db.any('SELECT mst.fasilitas_wisata_get()')
+  try {
+    response.send(fasilitasWisata[0].fasilitas_wisata_get)
+  } catch (error) {
+    return response.status(400).send(error)
+  }
+}
+
 // Wisata ---------------------------------------------------------------------------------------------------------
 
 const getWisata = async (request, response, next) => {
@@ -64,7 +75,8 @@ const getWisata = async (request, response, next) => {
   const search = request.params.search
 
   const query = `SELECT wisata_id, wisata_nama, wisata_propinsi, wisata_kota, 
-                wisata_deskripsi, wisata_kategori,wisata_longitude, wisata_latitude, wisata_images 
+                wisata_deskripsi, wisata_kategori,wisata_longitude, wisata_latitude, 
+                wisata_images, wisata_views, wisata_jam, wisata_harga_ticket, wisata_fasilitas
                 FROM mst.wisata `
   let where
   let values
@@ -93,11 +105,16 @@ const getWisata = async (request, response, next) => {
 }
 
 const postWisata = async (request, response, next) => {
-  const { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, images } = request.body
+  const { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, images, jam, harga, fasilitas } = request.body
   const imagesJ = JSON.stringify(images)
-  const posting = await db.one(`INSERT INTO mst.wisata (wisata_nama, wisata_propinsi, wisata_kota, wisata_deskripsi, wisata_kategori, wisata_logitute, wisata_latitude, wisata_images )
-        VALUES ($(nama),$(propinsi),$(kota),$(deskripsi),$(kategori),$(logitude),$(latitude),$(imagesJ)) RETURNING wisata_id 
-        `, { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, imagesJ })
+  const posting = await db.one(
+        `INSERT INTO mst.wisata (wisata_nama, wisata_propinsi, wisata_kota, wisata_deskripsi,
+          wisata_kategori, wisata_logitute, wisata_latitude, wisata_images, 
+          wisata_jam, wisata_harga_ticket, wisata_fasilitas)
+        VALUES ($(nama),$(propinsi),$(kota),$(deskripsi),
+        $(kategori),$(logitude),$(latitude),$(imagesJ), 
+        $(jam), $(harga), $(fasilitas), ) RETURNING wisata_id 
+        `, { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, imagesJ, jam, harga, fasilitas })
   try {
     response.json(posting)
   } catch (error) {
@@ -107,12 +124,13 @@ const postWisata = async (request, response, next) => {
 
 const putWisata = async (request, response, next) => {
   const id = request.params.id
-  const { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, images } = request.body
+  const { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, images, jam, harga, fasilitas } = request.body
   const imagesJ = JSON.stringify(images)
   await db.none(`UDPATE mst.wisata SET wisata_nama = $(nama), wisata_propinsi = ,$(propinsi), wisata_kota = $(kota), 
-          wisata_deskripsi = $(deskripsi) , wisata_kategori = $(kategori), wisata_logitute = $(logitude), wisata_latitude = $(latitude), wisata_images = $(imagesJ)
+          wisata_deskripsi = $(deskripsi) , wisata_kategori = $(kategori), wisata_logitute = $(logitude), wisata_latitude = $(latitude), 
+          wisata_images = $(imagesJ), jam = $(jam), harga = $(harga), fasilitas = $(fasilitas)
           WHERE wisata_id = $(id)
-        `, { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, imagesJ, id })
+        `, { nama, propinsi, kota, deskripsi, kategori, logitude, latitude, imagesJ, id, jam, harga, fasilitas })
   try {
     response.json('updated')
   } catch (error) {
@@ -201,6 +219,7 @@ router.get('/kota/:propinsiId', getKota)
 router.get('/kecamatan/:kotaId', getKecamatan)
 router.get('/kelurahan/:kecamatanId', getKelurahan)
 router.get('/kategoriwisata', getKategoriWisata)
+router.get('/fasilitaswisata', getFasilitasWisata)
 router.get('/wisata/:jenis/:search', getWisata)
 router.post('/wisata', postWisata)
 router.put('/wisata/:id', putWisata)

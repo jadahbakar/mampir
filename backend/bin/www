@@ -8,11 +8,13 @@ const app = require('../app')
 const debug = require('debug')('mampir-backend:server')
 const http = require('http')
 
+// config variables
+const config = require('../config/config.js')
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '7997')
+const port = normalizePort(config.app_port || '7997')
 app.set('port', port)
 
 /**
