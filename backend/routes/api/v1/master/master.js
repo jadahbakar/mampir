@@ -156,14 +156,12 @@ const getWisata = async (request, response, next) => {
 //   })
 
 const postWisataTest = async (request, response, next) => {
-  const { nama, deskripsi, latitude, longitude } = request.body
-  console.log('TCL: postWisataTest -> request.body', request.body)
-  console.log('TCL: postWisataTest -> longitude', longitude)
-  console.log('TCL: postWisataTest -> latitude', latitude)
-  console.log('TCL: postWisataTest -> deskripsi', deskripsi)
-  console.log('TCL: postWisataTest -> nama', nama)
-
-  response.status(200).json(request.body)
+  console.log('masuk')
+  const form = new formdiable.IncomingForm()
+  await form.parse(request, (err, fields, files) => {
+    console.log('TCL: postWisataTest -> fields', fields)
+    return response.status(200).json(fields)
+  })
 }
 
 const postWisata = async (request, response, next) => {
