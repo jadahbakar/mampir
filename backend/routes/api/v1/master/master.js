@@ -172,7 +172,7 @@ const postWisataTest = async (request, response, next) => {
     // return response.status(200).json(fields)
     const data = db.one(`INSERT INTO mst.wisata 
           (wisata_nama, wisata_deskripsi, wisata_longitude, wisata_latitude,wisata_jam) VALUES  
-          ($(nama), $(propinsi), $(kota), $(deskripsi), $(kategori),$(longitude),$(latitude), $(waktukunjung)) RETURNING wisata_id`,
+          ($(nama), $(deskripsi) ,$(longitude),$(latitude), $(waktukunjung)) RETURNING wisata_id`,
     { nama, deskripsi, longitude, latitude, waktukunjung })
     response.json(
       { data }
