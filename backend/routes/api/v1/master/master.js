@@ -348,4 +348,6 @@ router.delete('/wisata/:id', deleteWisata)
 router.get('/pictures/:jenis/:search', getPictures)
 router.delete('/pictures/:jenis/:search', deletePictures)
 
+router.post('/wisatatest', postWisataTest)
+
 module.exports = router
