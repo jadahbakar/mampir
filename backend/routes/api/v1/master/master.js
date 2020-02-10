@@ -157,7 +157,7 @@ const getWisata = async (request, response, next) => {
 
 const postWisataTest = async (request, response, next) => {
   const form = new formdiable.IncomingForm()
-  await form.parse(request, (err, fields, files) => {
+  form.parse(request, (err, fields, files) => {
     if (err) {
       response.json({ result: 'failed', data: {}, message: `Cannot Upload Images, Error is ${err}` })
     }
