@@ -156,10 +156,19 @@ const getWisata = async (request, response, next) => {
 //   })
 
 const postWisataTest = async (request, response, next) => {
-  console.log('masuk')
   const form = new formdiable.IncomingForm()
   await form.parse(request, (err, fields, files) => {
+    if (err) {
+      response.json({ result: 'failed', data: {}, message: `Cannot Upload Images, Error is ${err}` })
+    }
     console.log('TCL: postWisataTest -> fields', fields)
+    const { nama, deskripsi, latitude, longitude, waktukunjung } = fields
+    console.log('TCL: postWisataTest -> waktukunjung', waktukunjung)
+    console.log('TCL: postWisataTest -> longitude', longitude)
+    console.log('TCL: postWisataTest -> latitude', latitude)
+    console.log('TCL: postWisataTest -> deskripsi', deskripsi)
+    console.log('TCL: postWisataTest -> nama', nama)
+
     return response.status(200).json(fields)
   })
 }
