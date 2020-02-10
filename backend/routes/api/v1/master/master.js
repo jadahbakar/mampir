@@ -157,6 +157,7 @@ const getWisata = async (request, response, next) => {
 
 const postWisataTest = async (request, response, next) => {
   const form = new formdiable.IncomingForm()
+  form.keepExtensions = true
   form.parse(request, (err, fields, files) => {
     if (err) {
       response.json({ result: 'failed', data: {}, message: `Cannot Upload Images, Error is ${err}` })
@@ -173,7 +174,7 @@ const postWisataTest = async (request, response, next) => {
     // return response.status(200).json(fields)
     const data = db.one(`INSERT INTO mst.wisata 
           (wisata_nama, wisata_deskripsi, wisata_longitude, wisata_latitude,wisata_jam) VALUES  
-          ($(nama), $(deskripsi) ,$(longitude),$(latitude), $(waktukunjung)) RETURNING wisata_id`,
+          ($(nama), $(deskripsi) ,$(longitude),$(latitude), $(waktu)) RETURNING wisata_id`,
     { nama, deskripsi, longitude, latitude, waktu })
     response.json(
       { data }
