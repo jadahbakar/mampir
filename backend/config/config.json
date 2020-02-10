@@ -15,8 +15,10 @@
         "max_age_registration": "15m",
         "max_age_token": "2h",
         "redis_port": 6379,
-        "redis_host": "127.0.0.1"
-        
+        "redis_host": "127.0.0.1",
+        "static_wisata": "/static/images/wisata",
+        "static_propinsi": "/static/images/propinsi",
+        "static_kota": "/static/images/kota"    
     },
     "development_other": {
         "config_id": "development_other",
@@ -34,6 +36,9 @@
         "max_age_registration": "15m",
         "max_age_token": "2h",
         "redis_port": 6379,
-        "redis_host": "127.0.0.1"
+        "redis_host": "127.0.0.1",
+        "static_wisata": "/static/images/wisata",
+        "static_propinsi": "/static/images/propinsi",
+        "static_kota": "/static/images/kota"
     }
 }

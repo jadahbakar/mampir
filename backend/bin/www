@@ -7,9 +7,21 @@
 const app = require('../app')
 const debug = require('debug')('mampir-backend:server')
 const http = require('http')
-
 // config variables
 const config = require('../config/config.js')
+
+const appRoot = require('app-root-path')
+const fs = require('fs')
+fs.mkdir(appRoot.path + config.static_wisata, { recursive: true }, (err) => {
+  if (err) throw err
+})
+fs.mkdir(appRoot.path + config.static_propinsi, { recursive: true }, (err) => {
+  if (err) throw err
+})
+fs.mkdir(appRoot.path + config.static_kota, { recursive: true }, (err) => {
+  if (err) throw err
+})
+
 /**
  * Get port from environment and store in Express.
  */
