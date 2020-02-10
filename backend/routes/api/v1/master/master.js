@@ -163,7 +163,7 @@ const postWisataTest = async (request, response, next) => {
     }
     console.log('TCL: postWisataTest -> fields', fields)
     const { nama, deskripsi, latitude, longitude, waktukunjung } = fields
-    console.log('TCL: postWisataTest -> waktukunjung', waktukunjung)
+    console.log('TCL: postWisataTest -> waktukunjung', JSON.stringify(waktukunjung))
     console.log('TCL: postWisataTest -> longitude', longitude)
     console.log('TCL: postWisataTest -> latitude', latitude)
     console.log('TCL: postWisataTest -> deskripsi', deskripsi)
