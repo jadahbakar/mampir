@@ -168,12 +168,13 @@ const postWisataTest = async (request, response, next) => {
     console.log('TCL: postWisataTest -> latitude', latitude)
     console.log('TCL: postWisataTest -> deskripsi', deskripsi)
     console.log('TCL: postWisataTest -> nama', nama)
+    const waktu = JSON.stringify(waktukunjung)
 
     // return response.status(200).json(fields)
     const data = db.one(`INSERT INTO mst.wisata 
           (wisata_nama, wisata_deskripsi, wisata_longitude, wisata_latitude,wisata_jam) VALUES  
           ($(nama), $(deskripsi) ,$(longitude),$(latitude), $(waktukunjung)) RETURNING wisata_id`,
-    { nama, deskripsi, longitude, latitude, waktukunjung })
+    { nama, deskripsi, longitude, latitude, waktu })
     response.json(
       { data }
     )
