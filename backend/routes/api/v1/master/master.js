@@ -155,6 +155,16 @@ const getWisata = async (request, response, next) => {
 //     }
 //   })
 
+function objToString (obj) {
+  var str = ''
+  for (var p in obj) {
+    if (obj.hasOwnProperty(p)) {
+      str += p + '::' + obj[p] + '\n'
+    }
+  }
+  return str
+}
+
 const postWisataTest = async (request, response, next) => {
   const form = new formdiable.IncomingForm()
   await form.parse(request, (err, fields, files) => {
@@ -163,7 +173,7 @@ const postWisataTest = async (request, response, next) => {
     }
     console.log('TCL: postWisataTest -> fields', fields)
     const { nama, deskripsi, latitude, longitude, waktukunjung } = fields
-    console.log('TCL: postWisataTest -> waktukunjung', JSON.stringify(waktukunjung))
+    console.log('TCL: postWisataTest -> waktukunjung', objToString(waktukunjung))
     console.log('TCL: postWisataTest -> longitude', longitude)
     console.log('TCL: postWisataTest -> latitude', latitude)
     console.log('TCL: postWisataTest -> deskripsi', deskripsi)
